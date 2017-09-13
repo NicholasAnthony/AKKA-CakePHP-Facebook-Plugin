@@ -37,7 +37,8 @@ class FacebookHelper extends Helper
         'app_id' => '',
         'redirect_url' => '',
         'app_scope' => '',
-        'cookie' => true
+        'cookie' => true,
+        'version' => 'v2.8'
     ];
 
     public function __construct(View $view, $config = [])
@@ -48,6 +49,7 @@ class FacebookHelper extends Helper
         $this->redirectUrl = $this->_configs['redirect_url'];
         $this->appScope = $this->_configs['app_scope'];
         $this->cookie = $this->_configs['cookie'];
+        $this->version = $this->_configs['version'];
     }
 
     /**
@@ -86,28 +88,28 @@ class FacebookHelper extends Helper
             ], $options);
 
         return <<<EOT
-	<div class="fb-login-button" 
-	    data-auto-logout-link="{$options['auto-logout-link']}" 
-		data-max-rows="{$options['max-rows']}" 
-		    onlogin="{$options['onlogin']}" 
-			data-scope="{$options['scope']}" 
-			    data-size="{$options['size']}" 
-				data-show-faces="{$options['show-faces']}" 
-				    data-default-audience="{$options['default-audience']}"></div>
+  <div class="fb-login-button" 
+      data-auto-logout-link="{$options['auto-logout-link']}" 
+    data-max-rows="{$options['max-rows']}" 
+        onlogin="{$options['onlogin']}" 
+      data-scope="{$options['scope']}" 
+          data-size="{$options['size']}" 
+        data-show-faces="{$options['show-faces']}" 
+            data-default-audience="{$options['default-audience']}"></div>
 EOT;
     }
 
     public function initJsSDK()
     {
         return <<<EOT
-	<div id="fb-root"></div>
+  <div id="fb-root"></div>
         <script>
       window.fbAsyncInit = function() {
         FB.init({
           appId      : '$this->appId',
           cookie     : '$this->cookie',
           xfbml      : true,
-          version    : 'v2.10'
+          version    : '$this->version'
         });
       };
 
@@ -136,8 +138,8 @@ EOT;
      * Create facebook share button
      * 
      * Options
-     * 	    href	-> not set
-     * 	    action	-> [button_count]/box_count/button/icon_link/icon/link
+     *      href  -> not set
+     *      action  -> [button_count]/box_count/button/icon_link/icon/link
      * 
      * @param type $options
      * @return type
@@ -149,10 +151,10 @@ EOT;
             ], $options);
 
         return <<<EOT
-	<div class="fb-share-button" 
-	    data-href="{$this->__href($options)}" 
-		data-layout="{$options['layout']}">
-		    </div>
+  <div class="fb-share-button" 
+      data-href="{$this->__href($options)}" 
+    data-layout="{$options['layout']}">
+        </div>
 EOT;
     }
 
@@ -160,13 +162,13 @@ EOT;
      * Create Facebook FollowButton
      * 
      * options
-     * 	    href		-> not set
-     * 	    height		-> 100
-     * 	    width		-> 300
-     * 	    colorscheme		-> light
-     * 	    layout		-> standard/button_count/box_count
-     * 	    show-faces		-> false
-     * 	    kid-directed-site	-> false
+     *      href    -> not set
+     *      height    -> 100
+     *      width   -> 300
+     *      colorscheme   -> light
+     *      layout    -> standard/button_count/box_count
+     *      show-faces    -> false
+     *      kid-directed-site -> false
      * 
      * @param type $options
      * @return type
@@ -183,15 +185,15 @@ EOT;
             ], $options);
 
         return <<<EOT
-	<div class="fb-follow" 
-	    data-href="{$this->__href($options)}" 
-		data-width="{$options['width']}" 
-		    data-height="{$options['height']}" 
-			data-colorscheme="{$options['colorscheme']}" 
-			    data-layout="{$options['layout']}" 
-				data-show-faces="{$options['show-faces']}" 
-				    data-kid-directed-site="{$options['kid-directed-site']}">
-					</div>
+  <div class="fb-follow" 
+      data-href="{$this->__href($options)}" 
+    data-width="{$options['width']}" 
+        data-height="{$options['height']}" 
+      data-colorscheme="{$options['colorscheme']}" 
+          data-layout="{$options['layout']}" 
+        data-show-faces="{$options['show-faces']}" 
+            data-kid-directed-site="{$options['kid-directed-site']}">
+          </div>
 EOT;
     }
 
@@ -224,10 +226,10 @@ EOT;
      * Create facebook send button
      * 
      * options
-     * 	    href		-> not set
-     * 	    width		-> 50
-     * 	    height		-> 30
-     * 	    colorscheme	-> dark
+     *      href    -> not set
+     *      width   -> 50
+     *      height    -> 30
+     *      colorscheme -> dark
      * 
      * @param type $options
      * @return type
@@ -241,12 +243,12 @@ EOT;
         ];
 
         return <<<EOT
-	<div class="fb-send" 
-	    data-href="{$this->__href($options)}" 
-		data-width="{$options['width']}" 
-		    data-height="{$options['height']}" 
-			data-colorscheme="{$options['colorscheme']}">
-			    </div>
+  <div class="fb-send" 
+      data-href="{$this->__href($options)}" 
+    data-width="{$options['width']}" 
+        data-height="{$options['height']}" 
+      data-colorscheme="{$options['colorscheme']}">
+          </div>
 EOT;
     }
 
@@ -254,12 +256,12 @@ EOT;
      * Create facebook like button
      * 
      * Options
-     * 	    href	    -> not set
-     * 	    action	    -> like
-     * 	    share	    -> true
-     * 	    width	    -> 450
-     * 	    show-faces -> true
-     * 	    layout	    -> [standard]/box_count/button_count/button
+     *      href      -> not set
+     *      action      -> like
+     *      share     -> true
+     *      width     -> 450
+     *      show-faces -> true
+     *      layout      -> [standard]/box_count/button_count/button
      * 
      * @param type $options
      * @return type
@@ -275,26 +277,26 @@ EOT;
             ], $options);
 
         return <<<EOT
-	<div class="fb-like" 
-	    data-href="{$this->__href($options)}" 
-		data-share="{$options['share']}" 
-		    data-width="{$options['width']}" 
-			data-show-faces="{$options['show-faces']}" 
-			    data-layout="{$options['layout']}" 
-				data-action="{$options['action']}">
-				    </div>
+  <div class="fb-like" 
+      data-href="{$this->__href($options)}" 
+    data-share="{$options['share']}" 
+        data-width="{$options['width']}" 
+      data-show-faces="{$options['show-faces']}" 
+          data-layout="{$options['layout']}" 
+        data-action="{$options['action']}">
+            </div>
 EOT;
     }
 
     /**
      * Create facebook comments
      * 
-     * 	options
-     * 	    colorscheme	-> [light]/dark
-     * 	    mobile	-> Auto-detected
-     * 	    num-posts	-> 10
-     * 	    order-by	-> [social]/reverse_time/time
-     * 	    width	-> 550
+     *  options
+     *      colorscheme -> [light]/dark
+     *      mobile  -> Auto-detected
+     *      num-posts -> 10
+     *      order-by  -> [social]/reverse_time/time
+     *      width -> 550
      * 
      * @param type $options
      * @return type
@@ -310,14 +312,14 @@ EOT;
             ], $options);
 
         return <<<EOT
-	<div class="fb-comments" 
-	    data-href="{$this->here}" 
-		data-numposts="{$options['num-posts']}" 
-		    data-colorscheme="{$options['colorscheme']}" 
-			data-mobile="{$options['mobile']}" 
-			    data-order-by="{$options['order-by']}" 
-				data-width="{$options['width']}">
-				    </div>
+  <div class="fb-comments" 
+      data-href="{$this->here}" 
+    data-numposts="{$options['num-posts']}" 
+        data-colorscheme="{$options['colorscheme']}" 
+      data-mobile="{$options['mobile']}" 
+          data-order-by="{$options['order-by']}" 
+        data-width="{$options['width']}">
+            </div>
 EOT;
     }
 
@@ -325,8 +327,8 @@ EOT;
      * Created facebook embedded posts
      * 
      * options
-     * 	    href	-> not set
-     * 	    width	-> 500
+     *      href  -> not set
+     *      width -> 500
      * @param type $options
      * @return type
      */
@@ -337,10 +339,10 @@ EOT;
             ], $_);
 
         return <<<EOT
-	<div class="fb-post" 
-	    data-href="{$this->__href($options)}" 
-		data-width="{$options['width']}">
-		    </div>
+  <div class="fb-post" 
+      data-href="{$this->__href($options)}" 
+    data-width="{$options['width']}">
+        </div>
 EOT;
     }
 
@@ -348,8 +350,8 @@ EOT;
      * Created facebook embedded videos
      * 
      * options
-     * 	    href	-> not set
-     * 	    width	-> 500
+     *      href  -> not set
+     *      width -> 500
      * @see https://developers.facebook.com/docs/plugins/embedded-video-player
      * @param type $options
      * @return type
@@ -362,10 +364,10 @@ EOT;
             ], $_);
 
         return <<<EOT
-	<div class="fb-video" 
-	    data-href="{$options['href']}" 
-		data-width="{$options['width']}">
-		    </div>
+  <div class="fb-video" 
+      data-href="{$options['href']}" 
+    data-width="{$options['width']}">
+        </div>
 EOT;
     }
 
@@ -373,12 +375,12 @@ EOT;
      * Created facebook page plugin
      * 
      * options
-     * 	    href	-> https://www.facebook.com/facebook
-     * 	    width	-> 500
-     * 	    height	-> 300
-     * 	    hide-cover	-> false
-     * 	    show-facepile -> true
-     * 	    show-posts	-> false
+     *      href  -> https://www.facebook.com/facebook
+     *      width -> 500
+     *      height  -> 300
+     *      hide-cover  -> false
+     *      show-facepile -> true
+     *      show-posts  -> false
      * 
      * @see https://developers.facebook.com/docs/plugins/embedded-video-player
      * @param type $options
@@ -396,14 +398,14 @@ EOT;
             ], $_);
 
         return <<<EOT
-	<div class="fb-video" 
-	    data-height="{$options['height']}"  
-		data-hide-cover="{$options['hide-cover']}"  
-		    data-show-facepile="{$options['show-facepile']}"  
-			data-show-posts="{$options['show-posts']}"
-			    data-href="{$options['href']}" 
-				data-width="{$options['width']}">
-				    </div>
+  <div class="fb-video" 
+      data-height="{$options['height']}"  
+    data-hide-cover="{$options['hide-cover']}"  
+        data-show-facepile="{$options['show-facepile']}"  
+      data-show-posts="{$options['show-posts']}"
+          data-href="{$options['href']}" 
+        data-width="{$options['width']}">
+            </div>
 EOT;
     }
 
