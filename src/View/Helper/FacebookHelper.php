@@ -104,7 +104,7 @@ EOT;
         FB.init({
           appId      : '$this->appId',
           xfbml      : true,
-          version    : 'v2.1'
+          version    : 'v2.10'
         });
       };
 
