@@ -36,7 +36,8 @@ class FacebookHelper extends Helper
     protected $_defaultConfig = [
         'app_id' => '',
         'redirect_url' => '',
-        'app_scope' => ''
+        'app_scope' => '',
+        'cookie' => true
     ];
 
     public function __construct(View $view, $config = [])
@@ -46,6 +47,7 @@ class FacebookHelper extends Helper
         $this->appId = $this->_configs['app_id'];
         $this->redirectUrl = $this->_configs['redirect_url'];
         $this->appScope = $this->_configs['app_scope'];
+        $this->cookie = $this->_configs['cookie'];
     }
 
     /**
@@ -103,6 +105,7 @@ EOT;
       window.fbAsyncInit = function() {
         FB.init({
           appId      : '$this->appId',
+          cookie     : '$this->cookie',
           xfbml      : true,
           version    : 'v2.10'
         });
